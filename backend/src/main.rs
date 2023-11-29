@@ -1,3 +1,6 @@
+mod common;
+mod v1;
+
 use std::env::var;
 
 use actix_web::{App, HttpServer};
