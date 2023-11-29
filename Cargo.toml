@@ -4,6 +4,24 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+actix-web = "4.4.0"
+chrono = "0.4.31"
+dotenvy = "0.15.7"
+env_logger = "0.10.1"
+log = "0.4.20"
+sea-orm = { version = "0.12.7", features = [
+    "sqlx-postgres",
+    "runtime-tokio-native-tls",
+    "macros",
+    "mock",
+    "with-chrono",
+    "with-uuid",
+] }
+serde = { version = "1.0.193", features = ["derive"] }
+uuid = "1.6.1"
+
+[dev-dependencies]
+actix-rt = "2.9.0"
 
 [[bin]]
 name = "echohub"
