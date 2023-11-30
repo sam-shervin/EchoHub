@@ -17,7 +17,10 @@ async fn main() -> std::io::Result<()> {
         }
     };
 
-    let address = var("ADDRESS").expect("ADDRESS must be set");
+    let address = match var("ADDRESS") {
+        Ok(address) => address,
+        Err(_) => "localhost:8000".to_owned(),
+    };
 
     let (host, port) = match address.find(':') {
         Some(index) => (
