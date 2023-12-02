@@ -1,10 +1,12 @@
 mod common;
 mod v1;
 
-use std::env::var;
+use std::{env::var, sync::Arc};
 
-use actix_web::{App, HttpServer};
+use actix_web::{web::Data, App, HttpServer};
 use dotenvy::dotenv;
+use sea_orm::Database;
+use v1::api::auth::{signin, signup};
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -32,9 +34,17 @@ async fn main() -> std::io::Result<()> {
         None => ("localhost", 8000),
     };
 
-    HttpServer::new(|| App::new())
-        .bind((host, port))
-        .unwrap()
-        .run()
-        .await
+    let postgres_uri = var("POSTGRES_URI").expect("POSTGRES_URI must be set");
+    let db = Arc::new(Database::connect(postgres_uri).await.unwrap());
+
+    HttpServer::new(move || {
+        App::new()
+            .service(signup)
+            .service(signin)
+            .app_data(Data::new(db.clone()))
+    })
+    .bind((host, port))
+    .unwrap()
+    .run()
+    .await
 }
