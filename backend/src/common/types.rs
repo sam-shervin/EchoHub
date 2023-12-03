@@ -32,3 +32,33 @@ impl SignupRequest {
         }
     }
 }
+
+#[derive(Clone, Debug, Serialize)]
+pub struct TokenResponse {
+    pub user_id: String,
+    pub token_type: String,
+    pub access_token: String,
+    pub refresh_token: String,
+    pub expires_in: u64,
+    pub scope: String,
+}
+
+impl TokenResponse {
+    pub fn new(
+        user_id: String,
+        token_type: String,
+        access_token: String,
+        refresh_token: String,
+        expires_in: u64,
+        scope: String,
+    ) -> Self {
+        Self {
+            user_id,
+            token_type,
+            access_token,
+            refresh_token,
+            expires_in,
+            scope,
+        }
+    }
+}
