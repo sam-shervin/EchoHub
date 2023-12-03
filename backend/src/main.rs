@@ -1,9 +1,10 @@
 mod common;
 mod v1;
 
-use std::{env::var, sync::Arc};
+use std::env::var;
 
 use actix_web::{web::Data, App, HttpServer};
+use common::types::AppState;
 use dotenvy::dotenv;
 use sea_orm::Database;
 use v1::api::auth::{signin, signup};
@@ -35,13 +36,13 @@ async fn main() -> std::io::Result<()> {
     };
 
     let postgres_uri = var("POSTGRES_URI").expect("POSTGRES_URI must be set");
-    let db = Arc::new(Database::connect(postgres_uri).await.unwrap());
+    let app_state = AppState::new(Database::connect(postgres_uri).await.unwrap());
 
     HttpServer::new(move || {
         App::new()
             .service(signup)
             .service(signin)
-            .app_data(Data::new(db.clone()))
+            .app_data(Data::new(app_state.clone()))
     })
     .bind((host, port))
     .unwrap()
