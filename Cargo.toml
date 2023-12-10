@@ -17,6 +17,7 @@ sea-orm = { version = "0.12.7", features = [
     "with-chrono",
     "with-uuid",
 ] }
+sentry = "0.32.0"
 serde = { version = "1.0.193", features = ["derive"] }
 uuid = "1.6.1"
 
