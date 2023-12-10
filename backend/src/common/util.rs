@@ -3,7 +3,7 @@ use std::{
     sync::atomic::{AtomicU64, Ordering::Relaxed},
 };
 
-use chrono::Local;
+use chrono::Utc;
 use log::warn;
 
 /// The epoch used for generating snowflake IDs.
@@ -38,7 +38,7 @@ pub fn generate_snowflake() -> String {
 
     let snowflake_base = (process_id << 17) + (worker_id << 12);
     let snowflake = snowflake_base
-        + ((Local::now().timestamp_millis() as u64 - EPOCH) << 22)
+        + ((Utc::now().timestamp_millis() as u64 - EPOCH) << 22)
         + GENERATED_IDS.fetch_add(1, Relaxed);
 
     snowflake.to_string()
