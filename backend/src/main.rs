@@ -20,6 +20,14 @@ async fn main() -> std::io::Result<()> {
         }
     };
 
+    let _guard = sentry::init((
+        var("SENTRY_DSN").expect("SENTRY_DSN must be set"),
+        sentry::ClientOptions {
+            release: sentry::release_name!(),
+            ..Default::default()
+        },
+    ));
+
     let address = match var("ADDRESS") {
         Ok(address) => address,
         Err(_) => "localhost:8000".to_owned(),
