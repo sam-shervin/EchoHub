@@ -1,0 +1,15 @@
+{
+    "arrowParens": "always",
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "tabWidth": 4,
+    "printWidth": 73,
+    "overrides": [
+        {
+            "files": "*.{yaml,yml}",
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
+}
