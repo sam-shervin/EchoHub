@@ -1,0 +1,16 @@
+{
+    "name": "echohub",
+    "version": "0.1.0",
+    "description": "",
+    "main": "index.js",
+    "keywords": [],
+    "author": "Sai Kumar <ksai44576@gmail.com>",
+    "license": "Apache-2.0",
+    "scripts": {
+        "dev": "next dev web",
+        "build": "next build web",
+        "start": "next start web",
+        "lint": "next lint web",
+        "format": "prettier --write ."
+    }
+}
