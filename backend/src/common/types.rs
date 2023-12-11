@@ -33,7 +33,7 @@ impl SignupRequest {
     }
 }
 
-#[derive(Clone, Debug, Serialize)]
+#[derive(Debug, Clone, Serialize)]
 pub struct TokenResponse {
     pub user_id: String,
     pub token_type: String,
@@ -60,5 +60,17 @@ impl TokenResponse {
             expires_in,
             scope,
         }
+    }
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Claims {
+    user_id: String,
+    exp: u64,
+}
+
+impl Claims {
+    pub fn new(user_id: String, exp: u64) -> Self {
+        Self { user_id, exp }
     }
 }
