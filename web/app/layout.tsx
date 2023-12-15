@@ -1,6 +1,6 @@
-import type { Metadata } from 'next';
-import type { ReactNode } from 'react';
 import RecoilProvider from '@components/RecoilProvider';
+import type { Metadata } from 'next';
+import type { PropsWithChildren, ReactNode } from 'react';
 
 export const metadata: Metadata = {
     title: 'EchoHub | Home',
@@ -9,9 +9,7 @@ export const metadata: Metadata = {
     creator: 'The EchoHub Team',
 };
 
-type Props = {
-    children: ReactNode;
-};
+type Props = PropsWithChildren<{}>;
 
 export default function RootLayout({ children }: Props): ReactNode {
     return (
