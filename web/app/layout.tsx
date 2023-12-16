@@ -1,4 +1,5 @@
 import RecoilProvider from '@components/RecoilProvider';
+import '@styles/globals.scss';
 import type { Metadata } from 'next';
 import type { PropsWithChildren, ReactNode } from 'react';
 
